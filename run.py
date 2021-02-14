@@ -6,10 +6,9 @@ from flask_cors import CORS
 
 import firebase_admin
 from firebase_admin import credentials, firestore
-cred = credentials.Certificate("./serviceAccountKey.json")
+cred = credentials.Certificate('./serviceAccountKey.json')
 firebase_admin.initialize_app(cred)
 firestore_db = firestore.client()
-
 
 app = Flask(__name__)
 CORS(app)
@@ -27,14 +26,10 @@ def get():
 
 @app.route('/meeting', methods=['POST'])
 def meeting():
-    
     data = (request.data.decode())
-
     time = (json.loads(data)['time'])
-    
     snapshots = (firestore_db.collection(u'meetings').document(str(time)).get())
-
     return snapshots.to_dict()
 
 
-app.run()
+app.run(host='0.0.0.0')

@@ -35,7 +35,7 @@ def sleeper():
                 user_id = user['id']
                 #print(json.loads(client.meeting.list(user_id=user_id).content))
 
-            zoom_meeting = client.meeting.create(topic="Meeting", type=2, duration=30, user_id=user_id, agenda="", host_id = user_id)
+            zoom_meeting = client.meeting.create(topic="Meeting", type=2, duration=30, user_id=user_id, agenda="", host_id = user_id, settings={'join_before_host': True})
             t = ((zoom_meeting.json()))
             firestore_db.collection(u'meetings').document(str(hour)).set({'zoom_id' : t['join_url']})
 

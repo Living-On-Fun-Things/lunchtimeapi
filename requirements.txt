@@ -1,3 +1,3 @@
 flask
 flask-cors
-firebase_admin
+boto3

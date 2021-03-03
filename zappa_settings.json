@@ -1,0 +1,13 @@
+{
+    "dev": {
+        "app_function": "run.app",
+        "aws_region": "eu-west-1",
+        "profile_name": "developer_backend",
+        "project_name": "lunchtimeapi",
+        "runtime": "python3.8",
+        "s3_bucket": "zappa-ltsf2ijqq",
+        "environment_variables": {
+            "REQUESTS_CA_BUNDLE": "/var/task/cacert.pem"
+        }
+    }
+}

@@ -1,14 +1,10 @@
 from flask import Flask
 from flask import request, jsonify
 import json
-from json import loads as toDict
+from json import loads
 from flask_cors import CORS
-
-import firebase_admin
-from firebase_admin import credentials, firestore
-cred = credentials.Certificate('./serviceAccountKey.json')
-firebase_admin.initialize_app(cred)
-firestore_db = firestore.client()
+import boto3
+from boto3.dynamodb.conditions import Key, Attr
 
 app = Flask(__name__)
 CORS(app)
@@ -28,8 +24,15 @@ def get():
 def meeting():
     data = (request.data.decode())
     time = (json.loads(data)['time'])
-    snapshots = (firestore_db.collection(u'meetings').document(str(time)).get())
-    return snapshots.to_dict()
+    print(time)
+    dynamodb = boto3.resource('dynamodb', region_name="eu-west-1",aws_access_key_id="AKIAVHIWAVD7RSBS7U5Q", aws_secret_access_key= "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")
+    table = dynamodb.Table('lunchtimeio_community_meetings')
+    response = table.query(KeyConditionExpression=Key('timeslots').eq(str(time)))
+
+    data = {'response': response['Items'][0]['zoomlink']}
+    print(jsonify(data))
+    return jsonify(data)
 
 
-app.run(host='0.0.0.0')
+if __name__ == '__main__':
+    app.run()

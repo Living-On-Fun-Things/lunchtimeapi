@@ -1,0 +1,13 @@
+{
+    "dev": {
+        "app_function": "run.app",
+        "profile_name": "developer_backend",
+        "aws_region": "",
+        "project_name": "lunchtime-commu",
+        "environment_variables": {
+            "REQUESTS_CA_BUNDLE": "/var/task/cacert.pem"
+        },
+        "runtime": "python3.8",
+        "s3_bucket": "zappa-kai744b9d"
+    }
+}

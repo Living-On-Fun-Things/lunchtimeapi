@@ -3,7 +3,7 @@ Backend API service for Lunchtime IO, following microservices architecture
 
 Each of these services should run on a AWS Lambda instance.
 
-## Deployment to AWS
+## Deployment to AWS Lambda
 Initialize your deployment by creating a new virtual environment on the folder
 <code> virtualenv .env </code> 
 
@@ -22,3 +22,6 @@ Follow through onboarding and then deploy:
 To update, run: 
 
 <code> zappa update [YOUR ENVIRONMENT SUCH AS DEV] </code>
+
+## Deployment to AWS EC2
+Utility files are services which can be deployed to EC2 and run Chronjobs to automate jobs like clearing counters etc.
